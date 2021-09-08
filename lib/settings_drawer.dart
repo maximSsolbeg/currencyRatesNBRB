@@ -15,7 +15,7 @@ class SettingsDrawer extends StatelessWidget {
               color: Colors.grey,
             ),
             child: Text(
-                'DrawerHeader',
+                'Settings',
                 style: TextStyle(
                   color: Colors.black,
                 )
