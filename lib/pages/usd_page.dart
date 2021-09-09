@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:currency_rates/main.dart';
-import 'package:currency_rates/settings_drawer.dart';
+import 'package:currency_rates/components/settings_drawer.dart';
 import 'package:currency_rates/colors.dart' as custom_colors;
+import 'package:currency_rates/pages/home_page.dart';
 
 class UsdPage extends StatelessWidget {
   @override
