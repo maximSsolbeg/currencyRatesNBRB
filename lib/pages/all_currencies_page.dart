@@ -2,11 +2,10 @@ import 'package:currency_rates/temporary_data.dart';
 import 'package:flutter/material.dart';
 import 'package:currency_rates/components/settings_drawer.dart';
 import 'package:currency_rates/colors.dart' as custom_colors;
-import 'package:currency_rates/pages/home_page.dart';
 import 'package:intl/intl.dart';
 
-var currentDate = DateTime.parse(allRates[0]["Date"]);
-var formattedDate = DateFormat.yMMMd().format(currentDate);
+final currentDate = DateTime.parse(allRates[0]["Date"]);
+final formattedDate = DateFormat.yMMMd().format(currentDate);
 
 class AllCurrenciesPage extends StatelessWidget {
   @override
@@ -38,7 +37,6 @@ class AllCurrenciesPage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Color(0XFFCCD1E0)),
           onPressed: () {
-            Route route = MaterialPageRoute(builder: (context) => HomePage());
             Navigator.pop(context);
           },
         ),

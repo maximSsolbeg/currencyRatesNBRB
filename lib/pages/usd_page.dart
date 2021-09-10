@@ -22,7 +22,6 @@ class UsdPage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Color(0XFFCCD1E0)),
           onPressed: () {
-            Route route = MaterialPageRoute(builder: (context) => HomePage());
             Navigator.pop(context);
           },
         ),
@@ -40,7 +39,6 @@ class UsdPageBody extends StatelessWidget {
     return Center(
       child: ElevatedButton(
         onPressed: () {
-          Route route = MaterialPageRoute(builder: (context) => HomePage());
           Navigator.pop(context);
         },
         child: const Text('Move to HomePage'),

@@ -84,19 +84,19 @@ class _HomePageState extends State<HomePage> {
                   title: Text(mainCurrencies[index]['curNameEng']),
                   subtitle: Text('${mainCurrencies[index]["percentageGrowth"]}'),
                   leading: Container(
-                      height: 60,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: mainCurrencies[index]['iconBgrColor'],
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: mainCurrencies[index]['iconBgrColor'],
+                    ),
+                    child: Center(
+                      child: SvgPicture.asset(
+                          'assets/${mainCurrencies[index]['currencyIcon']}.svg',
+                          height: 24,
+                          color: mainCurrencies[index]['iconColor']
                       ),
-                      child: Center(
-                        child: SvgPicture.asset(
-                            'assets/${mainCurrencies[index]['currencyIcon']}.svg',
-                            height: 24,
-                            color: mainCurrencies[index]['iconColor']
-                        ),
-                      )
+                    )
                   ),
                   trailing: SizedBox(
                     height: double.infinity,
@@ -106,29 +106,27 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Image.asset(
                           'assets/graph.png',
-                          // height: 20,
-                          // width: 30,
                         ),
                         const SizedBox(width: 10,),
                         Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                '${mainCurrencies[index]['curOfficialRate']}',
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              '${mainCurrencies[index]['curOfficialRate']}',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Text(
-                                '${mainCurrencies[index]["curAbbreviation"]}',
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  color: custom_colors.secondaryGray,
-                                ),
+                            ),
+                            Text(
+                              '${mainCurrencies[index]["curAbbreviation"]}',
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: custom_colors.secondaryGray,
                               ),
-                            ]
+                            ),
+                          ]
                         ),
                       ],
                     ),

@@ -6014,7 +6014,6 @@ const List<Map<String, dynamic>> allCurrencies = [
     "Cur_DateEnd": "2050-01-01T00:00:00"
   }
 ];
-
 // end of mocked data
 
 Future<http.Response> getExRatesData() async{
