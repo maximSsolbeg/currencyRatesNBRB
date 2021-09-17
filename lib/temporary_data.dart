@@ -6015,20 +6015,3 @@ const List<Map<String, dynamic>> allCurrencies = [
   }
 ];
 // end of mocked data
-
-Future<http.Response> getExRatesData() async{
-  const url = 'https://www.nbrb.by/api/exrates/rates?periodicity=0';
-  return await http.get(Uri.parse(url));
-}
-
-void loadExRatesData() {
-  getExRatesData().then((response) {
-    if(response.statusCode == 200) {
-      print(response.body);
-    } else {
-      print(response.statusCode);
-    }
-  }).catchError((error) {
-    debugPrint(error.toString());
-  });
-}

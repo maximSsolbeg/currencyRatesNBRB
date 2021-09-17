@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:currency_rates/main.dart';
 import 'package:currency_rates/components/settings_drawer.dart';
 import 'package:currency_rates/colors.dart' as custom_colors;
-import 'package:currency_rates/pages/home_page.dart';
 
 class UsdPage extends StatelessWidget {
   @override
@@ -37,11 +35,15 @@ class UsdPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        child: const Text('Move to HomePage'),
+      child: Column(
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text('Move to HomePage'),
+          ),
+        ],
       ),
     );
   }

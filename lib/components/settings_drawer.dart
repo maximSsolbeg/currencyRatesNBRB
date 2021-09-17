@@ -6,7 +6,6 @@ class SettingsDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
@@ -22,15 +21,15 @@ class SettingsDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text('Item 1'),
+            title: const Text('About the App'),
             onTap: () {},
           ),
           ListTile(
-            title: const Text('Item 2'),
+            title: const Text('Settings'),
             onTap: () {},
           ),
           ListTile(
-            title: const Text('Item 3'),
+            title: const Text('Contact Us'),
             onTap: () {},
           ),
         ],
