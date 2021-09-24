@@ -1,4 +1,4 @@
-import 'package:currency_rates/colors.dart' as custom_colors;
+import 'package:currency_rates/colors.dart' ;
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
@@ -11,8 +11,8 @@ const List<Map<String, dynamic>> mainCurrencies = [
     'percentageGrowth': '0.28*',
     'curNameEng': 'US Dollar',
     'curOfficialRate': 2.5104,
-    'iconBgrColor': custom_colors.lightPink,
-    'iconColor': custom_colors.deepOrange,
+    'iconBgrColor': CustomColors.lightPink,
+    'iconColor': CustomColors.deepOrange,
   },
   {
     'currencyIcon': 'euro-currency-symbol',
@@ -21,8 +21,8 @@ const List<Map<String, dynamic>> mainCurrencies = [
     'percentageGrowth': '0.15*',
     'curNameEng': 'Euro',
     'curOfficialRate': 2.9823,
-    'iconBgrColor': custom_colors.lightBlue,
-    'iconColor': custom_colors.deepBlue,
+    'iconBgrColor': CustomColors.lightBlue,
+    'iconColor': CustomColors.deepBlue,
   },
   {
     'currencyIcon': 'ruble-currency-sign',
@@ -31,8 +31,8 @@ const List<Map<String, dynamic>> mainCurrencies = [
     'percentageGrowth': '-0.15*',
     'curNameEng': '100 Russian Rubles*',
     'curOfficialRate': 3.4515,
-    'iconBgrColor': custom_colors.lightGreen,
-    'iconColor': custom_colors.deepGreen,
+    'iconBgrColor': CustomColors.lightGreen,
+    'iconColor': CustomColors.deepGreen,
   },
 ];
 
@@ -6014,4 +6014,55 @@ const List<Map<String, dynamic>> allCurrencies = [
     "Cur_DateEnd": "2050-01-01T00:00:00"
   }
 ];
+
+//https://www.nbrb.by/API/ExRates/Rates/Dynamics/431?startdate=2019-1-1&enddate=2021-9-8
+
+const List<Map<String, dynamic>> mockedDynamic = [
+  {
+  "Cur_ID": 145,
+  "Date": "2019-07-10T00:00:00",
+  "Cur_OfficialRate": 2.0498
+  },
+  {
+  "Cur_ID": 145,
+  "Date": "2019-07-11T00:00:00",
+  "Cur_OfficialRate": 2.0467
+  },
+  {
+  "Cur_ID": 145,
+  "Date": "2019-07-12T00:00:00",
+  "Cur_OfficialRate": 2.0340
+  },
+  {
+  "Cur_ID": 145,
+  "Date": "2019-07-13T00:00:00",
+  "Cur_OfficialRate": 2.0342
+  },
+  {
+  "Cur_ID": 145,
+  "Date": "2019-07-14T00:00:00",
+  "Cur_OfficialRate": 2.0342
+  },
+  {
+  "Cur_ID": 145,
+  "Date": "2019-07-15T00:00:00",
+  "Cur_OfficialRate": 2.0342
+  },
+  {
+  "Cur_ID": 145,
+  "Date": "2019-07-16T00:00:00",
+  "Cur_OfficialRate": 2.0310
+  },
+  {
+  "Cur_ID": 145,
+  "Date": "2019-07-17T00:00:00",
+  "Cur_OfficialRate": 2.0309
+  },
+  {
+  "Cur_ID": 145,
+  "Date": "2019-07-18T00:00:00",
+  "Cur_OfficialRate": 2.0341
+  },
+];
+
 // end of mocked data

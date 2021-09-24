@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:currency_rates/data.dart';
+import 'package:currency_rates/providers/cur_rates_provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:currency_rates/pages/usd_page.dart';
-import 'package:currency_rates/colors.dart' as custom_colors;
+import 'package:currency_rates/colors.dart' ;
 import 'package:provider/provider.dart';
 
 class MainCurrenciesList extends StatefulWidget{
@@ -14,27 +14,27 @@ class MainCurrenciesList extends StatefulWidget{
 class _MainCurrenciesListState extends State<MainCurrenciesList> {
   @override
   Widget build(BuildContext context){
-    return Consumer<CurRatesProvider>(
-      builder: (context, cart, child) => ListView(
+    CurRatesProvider _currenciesRatesState = Provider.of<CurRatesProvider>(context);
+    return ListView(
         scrollDirection: Axis.vertical,
         children: <Widget>[
           // USD rates
           ListTile(
             contentPadding: EdgeInsets.zero,
-            title: Text(cart.getUsdData.Cur_Name),
+            title: Text(_currenciesRatesState.getUsdData.Cur_Name),
             subtitle: Text('0.99*'),
             leading: Container(
                 height: 60,
                 width: 60,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: custom_colors.lightPink,
+                  color: CustomColors.lightPink,
                 ),
                 child: Center(
                   child: SvgPicture.asset(
                       'assets/dollar-currency-sign.svg',
                       height: 24,
-                      color: custom_colors.deepOrange
+                      color: CustomColors.deepOrange
                   ),
                 )
             ),
@@ -53,14 +53,14 @@ class _MainCurrenciesListState extends State<MainCurrenciesList> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          '${cart.getUsdData.Cur_OfficialRate}',
+                          '${_currenciesRatesState.getUsdData.Cur_OfficialRate}',
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          cart.getUsdData.Cur_Abbreviation,
+                          _currenciesRatesState.getUsdData.Cur_Abbreviation,
                           style: const TextStyle(
                             fontSize: 12,
                           ),
@@ -81,25 +81,25 @@ class _MainCurrenciesListState extends State<MainCurrenciesList> {
           ),
           const Divider(
             height: 10,
-            color: custom_colors.primaryGray,
+            color: CustomColors.primaryGray,
           ),
           // EUR rates
           ListTile(
             contentPadding: EdgeInsets.zero,
-            title: Text(cart.getEurData.Cur_Name),
+            title: Text(_currenciesRatesState.getEurData.Cur_Name),
             subtitle: Text('0.28*'),
             leading: Container(
                 height: 60,
                 width: 60,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: custom_colors.lightBlue,
+                  color: CustomColors.lightBlue,
                 ),
                 child: Center(
                   child: SvgPicture.asset(
                       'assets/euro-currency-symbol.svg',
                       height: 24,
-                      color: custom_colors.deepBlue
+                      color: CustomColors.deepBlue
                   ),
                 )
             ),
@@ -118,14 +118,14 @@ class _MainCurrenciesListState extends State<MainCurrenciesList> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          '${cart.getEurData.Cur_OfficialRate}',
+                          '${_currenciesRatesState.getEurData.Cur_OfficialRate}',
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          cart.getEurData.Cur_Abbreviation,
+                          _currenciesRatesState.getEurData.Cur_Abbreviation,
                           style: const TextStyle(
                             fontSize: 12,
                           ),
@@ -146,25 +146,25 @@ class _MainCurrenciesListState extends State<MainCurrenciesList> {
           ),
           const Divider(
             height: 10,
-            color: custom_colors.primaryGray,
+            color: CustomColors.primaryGray,
           ),
           // RUR rates
           ListTile(
             contentPadding: EdgeInsets.zero,
-            title: Text('${cart.getRubData.Cur_Scale} ${cart.getRubData.Cur_Name}'),
+            title: Text('${_currenciesRatesState.getRubData.Cur_Scale} ${_currenciesRatesState.getRubData.Cur_Name}'),
             subtitle: Text('0.28*'),
             leading: Container(
                 height: 60,
                 width: 60,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: custom_colors.lightGreen,
+                  color: CustomColors.lightGreen,
                 ),
                 child: Center(
                   child: SvgPicture.asset(
                       'assets/ruble-currency-sign.svg',
                       height: 24,
-                      color: custom_colors.deepGreen
+                      color: CustomColors.deepGreen
                   ),
                 )
             ),
@@ -183,14 +183,14 @@ class _MainCurrenciesListState extends State<MainCurrenciesList> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          '${cart.getRubData.Cur_OfficialRate}',
+                          '${_currenciesRatesState.getRubData.Cur_OfficialRate}',
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          cart.getRubData.Cur_Abbreviation,
+                          _currenciesRatesState.getRubData.Cur_Abbreviation,
                           style: const TextStyle(
                             fontSize: 12,
                           ),
@@ -210,7 +210,6 @@ class _MainCurrenciesListState extends State<MainCurrenciesList> {
             },
           )
         ],
-      ),
-    );
+      );
   }
 }
