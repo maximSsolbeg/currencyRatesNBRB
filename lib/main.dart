@@ -1,6 +1,7 @@
 import 'package:currency_rates/colors.dart' ;
 import 'package:currency_rates/components/settings_drawer.dart';
 import 'package:currency_rates/providers/metals_rates_provider.dart';
+import 'package:currency_rates/providers/usd_dynamics_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:currency_rates/pages/usd_page.dart';
@@ -15,6 +16,7 @@ void main() => runApp(
       ChangeNotifierProvider<CurRatesProvider>(create: (context) => CurRatesProvider()),
       ChangeNotifierProvider<RefinancingRateProvider>(create: (context) => RefinancingRateProvider()),
       ChangeNotifierProvider<MetalsRatesProvider>(create: (context) => MetalsRatesProvider()),
+      ChangeNotifierProvider<UsdDynamicsProvider>(create: (context) => UsdDynamicsProvider()),
     ],
     child: CurrenciesApp(),
   )
@@ -39,11 +41,13 @@ class _CurrenciesAppState extends State<CurrenciesApp> {
 
     final allMetalsRatesMdl = Provider.of<MetalsRatesProvider>(context, listen: false);
     allMetalsRatesMdl.getCurMetalsRates(context);
+
+    final usdDynamicsMdl = Provider.of<UsdDynamicsProvider>(context, listen: false);
+    usdDynamicsMdl.getUsdDynamics(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    CurRatesProvider _allCurrencyRatesState = Provider.of<CurRatesProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -59,9 +63,7 @@ class _CurrenciesAppState extends State<CurrenciesApp> {
           backgroundColor: Colors.white,
           iconTheme: const IconThemeData(color: CustomColors.secondaryGray),
         ),
-        body: _allCurrencyRatesState.isLoadingCurRates
-          ? Center(child: CircularProgressIndicator())
-          : HomePage(),
+        body: HomePage(),
         endDrawer: const SettingsDrawer(),
       ),
       initialRoute: '/',

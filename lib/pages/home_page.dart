@@ -1,15 +1,22 @@
 import 'package:currency_rates/colors.dart';
 import 'package:currency_rates/pages/all_currencies_page.dart';
 import 'package:currency_rates/components/main_currency_list.dart';
+import 'package:currency_rates/providers/cur_rates_provider.dart';
+import 'package:currency_rates/providers/metals_rates_provider.dart';
+import 'package:currency_rates/providers/refinancing_rate_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:currency_rates/components/refinancing_rate_list.dart';
 import 'package:currency_rates/components/metals_rates_list.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    CurRatesProvider _allCurrencyRatesState = Provider.of<CurRatesProvider>(context);
+    RefinancingRateProvider _refinancialRateState = Provider.of<RefinancingRateProvider>(context);
+    MetalsRatesProvider _metalsRatesState = Provider.of<MetalsRatesProvider>(context);
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Padding(
@@ -59,7 +66,9 @@ class HomePage extends StatelessWidget {
             Container(
               height: 245,
               margin: const EdgeInsets.only(top: 14.0),
-              child: MainCurrenciesList(),
+              child: _allCurrencyRatesState.isLoadingCurRates
+                  ? const Center(child: CircularProgressIndicator())
+                  : MainCurrenciesList(),
             ),
 
             //Refinancing Rate
@@ -81,8 +90,9 @@ class HomePage extends StatelessWidget {
             ),
             Container(
               height: 85,
-              // margin: const EdgeInsets.only(top: 14.0),
-              child: RefinancingRateList(),
+              child: _refinancialRateState.isLoadingRefRate
+                  ? const Center(child: CircularProgressIndicator())
+                  : RefinancingRateList(),
             ),
 
             //Precious Metals Prices
@@ -104,7 +114,9 @@ class HomePage extends StatelessWidget {
             ),
             Container(
               height: 330,
-              child: MetalsRatesList(),
+              child: _metalsRatesState.isLoadingMetalsRates
+                  ? const Center(child: CircularProgressIndicator())
+                  : MetalsRatesList(),
             ),
           ],
         ),

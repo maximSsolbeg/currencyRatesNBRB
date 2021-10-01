@@ -7,3 +7,11 @@ String FormatDate (date) {
 
   return updatedDt;
 }
+
+String FormatDateForUrl (date) {
+  DateTime parseDt = DateTime.parse(date);
+  var newFormat = DateFormat('yyyy-LL-dd');
+  String updatedDt = newFormat.format(parseDt);
+
+  return updatedDt;
+}

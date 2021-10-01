@@ -1,8 +1,11 @@
+import 'package:currency_rates/models/currency_dynamics_mdl.dart';
+import 'package:currency_rates/providers/usd_dynamics_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:currency_rates/components/settings_drawer.dart';
 import 'package:currency_rates/colors.dart' ;
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:currency_rates/components/custom_graph.dart';
 
 class UsdPage extends StatelessWidget {
   @override
@@ -39,16 +42,6 @@ class UsdPageBody extends StatefulWidget {
 }
 
 class _UsdPageBodyState extends State<UsdPageBody> {
-  List<_UsdDynamics> data = [
-    _UsdDynamics(145, '07.08.19', 2.0526),
-    _UsdDynamics(145, '08.08.19', 2.0563),
-    _UsdDynamics(145, '09.08.19', 2.0567),
-    _UsdDynamics(145, '10.08.19', 2.0857),
-    _UsdDynamics(145, '11.08.19', 2.0125),
-    _UsdDynamics(145, '12.08.19', 2.1564),
-    _UsdDynamics(145, '13.08.19', 2.0845),
-  ];
-
   String reformatDate(date) {
     DateTime parseDt = DateTime.parse(date);
     var newFormat = DateFormat('dd.MM.yy');
@@ -59,38 +52,20 @@ class _UsdPageBodyState extends State<UsdPageBody> {
 
   @override
   Widget build(BuildContext context) {
+    UsdDynamicsProvider _usdDynamicsState = Provider.of<UsdDynamicsProvider>(context);
     return Center(
       child: Column(
         children: [
-          SfCartesianChart(
-            primaryXAxis: CategoryAxis(),
-            // Chart title
-            title: ChartTitle(text: 'Динамика курса BYN по отношению к USD'),
-            // Enable legend
-            legend: Legend(isVisible: false),
-            // Enable tooltip
-            tooltipBehavior: TooltipBehavior(enable: true),
-            series: <ChartSeries<_UsdDynamics, String>>[
-              LineSeries<_UsdDynamics, String>(
-                  dataSource: data,
-                  xValueMapper: (_UsdDynamics rates, _) {
-                    return rates.Date;
-                  },
-                  yValueMapper: (_UsdDynamics rates, _) => rates.Cur_OfficialRate,
-                  name: 'Sales',
-                  // Enable data label
-                  dataLabelSettings: DataLabelSettings(isVisible: false))
-            ]),
+          CustomGraph(
+              graphData: _usdDynamicsState.getUsdDynamicsList as List<CurrencyDynamics>,
+              titleText: 'Dynamics of BYN against USD',
+              graphName: 'USD dynamics',
+              lineColor: CustomColors.deepOrange,
+              primaryXAxisIsVisible: true,
+              primaryYAxisIsVisible: true,
+          ),
         ],
       ),
     );
   }
-}
-
-class _UsdDynamics {
-  _UsdDynamics(this.Cur_ID, this.Date, this.Cur_OfficialRate);
-
-  final int Cur_ID;
-  final String Date;
-  final double Cur_OfficialRate;
 }

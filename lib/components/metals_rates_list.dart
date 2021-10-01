@@ -24,6 +24,7 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
           leadingIconColor: CustomColors.paleGold,
           trailingValue: '${_metalsRatesState.getGoldData.Value}',
           trailingSubText: 'BYN / 1g',
+          symbolsInsteadOfIcon: true,
         ),
         GeneralListTile(
           titleText: 'Silver',
@@ -33,6 +34,7 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
           // leadingIconColor: CustomColors.paleGold,
           trailingValue: '${_metalsRatesState.getSilverData.Value}',
           trailingSubText: 'BYN / 1g',
+          symbolsInsteadOfIcon: true,
         ),
         GeneralListTile(
           titleText: 'Platinum',
@@ -42,6 +44,7 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
           leadingIconColor: CustomColors.deepPurple,
           trailingValue: '${_metalsRatesState.getPlatinumData.Value}',
           trailingSubText: 'BYN / 1g',
+          symbolsInsteadOfIcon: true,
         ),
         GeneralListTile(
           titleText: 'Palladium',
@@ -51,6 +54,7 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
           leadingIconColor: CustomColors.deepBlue,
           trailingValue: '${_metalsRatesState.getPalladiumData.Value}',
           trailingSubText: 'BYN / 1g',
+          symbolsInsteadOfIcon: true,
         ),
       ]
     );

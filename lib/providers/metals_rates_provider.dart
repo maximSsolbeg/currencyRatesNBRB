@@ -35,7 +35,7 @@ class MetalsRatesProvider with ChangeNotifier{
 
   void getCurMetalsRates(context) async {
     isLoadingMetalsRates = true;
-    allMetalsRatesList = await getCurrentMetalsRates();
+    allMetalsRatesList = await getMetalsRates();
     isLoadingMetalsRates = false;
 
     notifyListeners();
