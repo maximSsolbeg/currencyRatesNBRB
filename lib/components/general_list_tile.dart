@@ -1,4 +1,3 @@
-import 'package:currency_rates/pages/usd_page.dart';
 import 'package:flutter/material.dart';
 import 'package:currency_rates/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -72,7 +71,9 @@ class _GeneralListTileState extends State<GeneralListTile> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              widget.currancyGraph ?? const Text('dynamics is unavalible'),
+              Flexible(
+                child: widget.currancyGraph ?? const SizedBox.shrink(),
+              ),
               // Image.asset(
               //   'assets/graph.png',
               // ),
@@ -113,25 +114,3 @@ class _GeneralListTileState extends State<GeneralListTile> {
     ]);
   }
 }
-
-// Widget iconOrText(Widget widget, bool? symbolsInsteadOfIcon) {
-//   if (symbolsInsteadOfIcon == true) {
-//     return Center(
-//           child: Text(
-//               widget.leadingIcon,
-//               style: TextStyle(
-//                 // color: widget.leadingIconColor,
-//                 fontSize: 20,
-//                 fontWeight: FontWeight.bold,
-//               )));
-//     } else {
-//     return Center(
-//         child: Text('test 2',
-//             // widget.leadingIcon,
-//             style: TextStyle(
-//               // color: widget.leadingIconColor,
-//               fontSize: 20,
-//               fontWeight: FontWeight.bold,
-//             )));
-//   }
-// }

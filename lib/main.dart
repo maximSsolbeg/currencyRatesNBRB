@@ -1,6 +1,8 @@
 import 'package:currency_rates/colors.dart' ;
 import 'package:currency_rates/components/settings_drawer.dart';
+import 'package:currency_rates/providers/eur_dynamics_provider.dart';
 import 'package:currency_rates/providers/metals_rates_provider.dart';
+import 'package:currency_rates/providers/rub_dynamics_provider.dart';
 import 'package:currency_rates/providers/usd_dynamics_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +19,8 @@ void main() => runApp(
       ChangeNotifierProvider<RefinancingRateProvider>(create: (context) => RefinancingRateProvider()),
       ChangeNotifierProvider<MetalsRatesProvider>(create: (context) => MetalsRatesProvider()),
       ChangeNotifierProvider<UsdDynamicsProvider>(create: (context) => UsdDynamicsProvider()),
+      ChangeNotifierProvider<EurDynamicsProvider>(create: (context) => EurDynamicsProvider()),
+      ChangeNotifierProvider<RubDynamicsProvider>(create: (context) => RubDynamicsProvider()),
     ],
     child: CurrenciesApp(),
   )
@@ -44,6 +48,12 @@ class _CurrenciesAppState extends State<CurrenciesApp> {
 
     final usdDynamicsMdl = Provider.of<UsdDynamicsProvider>(context, listen: false);
     usdDynamicsMdl.getUsdDynamics(context);
+
+    final eurDynamicsMdl = Provider.of<EurDynamicsProvider>(context, listen: false);
+    eurDynamicsMdl.getEurDynamics(context);
+
+    final rubDynamicsMdl = Provider.of<RubDynamicsProvider>(context, listen: false);
+    rubDynamicsMdl.getRubDynamics(context);
   }
 
   @override

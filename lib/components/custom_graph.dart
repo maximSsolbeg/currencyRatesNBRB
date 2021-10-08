@@ -1,9 +1,10 @@
-import 'package:currency_rates/models/currency_dynamics_mdl.dart';
+import 'package:currency_rates/models/dynamics_mdl.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:currency_rates/common/format_date.dart';
 
 class CustomGraph extends StatefulWidget {
-  final List<CurrencyDynamics>? graphData;
+  final List<Dynamics>? graphData;
   final double? graphWidth;
   final String? titleText;
   final String? graphName;
@@ -36,6 +37,7 @@ class _CustomGraphState extends State<CustomGraph> {
       width: widget.graphWidth ?? double.infinity,
       child: SfCartesianChart(
           margin: EdgeInsets.zero,
+          enableAxisAnimation: true,
           // borderColor: Colors.red,
           plotAreaBorderColor: widget.graphBorderColor ?? Colors.transparent,
           title: ChartTitle(
@@ -43,18 +45,21 @@ class _CustomGraphState extends State<CustomGraph> {
           ),
           primaryXAxis: CategoryAxis(
             isVisible: widget.primaryXAxisIsVisible,
+            labelRotation: 90,
+              visibleMinimum: 5,
+              maximumLabels: 5
           ),
           primaryYAxis: NumericAxis(
             isVisible: widget.primaryYAxisIsVisible,
           ),
           legend: Legend(isVisible: false),
           tooltipBehavior: TooltipBehavior(enable: true),
-          series: <ChartSeries<CurrencyDynamics, String>>[
-            LineSeries<CurrencyDynamics, String>(
+          series: <ChartSeries<Dynamics, String>>[
+            LineSeries<Dynamics, String>(
                 dataSource: widget.graphData ?? [],
                 color: widget.lineColor,
-                xValueMapper: (CurrencyDynamics rates, _) => rates.Date,
-                yValueMapper: (CurrencyDynamics rates, _) => rates.Cur_OfficialRate,
+                xValueMapper: (Dynamics rates, _) => FormatDateShortView(rates.Date),
+                yValueMapper: (Dynamics rates, _) => rates.Cur_OfficialRate ?? rates.Value,
                 name: widget.graphName ?? 'dynamics',
                 dataLabelSettings: DataLabelSettings(isVisible: false))
           ]),

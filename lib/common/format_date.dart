@@ -15,3 +15,11 @@ String FormatDateForUrl (date) {
 
   return updatedDt;
 }
+
+String FormatDateShortView (date) {
+  DateTime parseDt = DateTime.parse(date);
+  var newFormat = DateFormat('dd.LL.yy');
+  String updatedDt = newFormat.format(parseDt);
+
+  return updatedDt;
+}
