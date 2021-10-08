@@ -4,9 +4,6 @@ import 'dart:convert';
 import 'package:currency_rates/common/format_date.dart';
 
 Future<List<Metal>> getCurrentMetalsRates() async {
-  var today = FormatDateForUrl(DateTime.now().toString());
-  // var today = '2021-10-04';
-
   String currentMetalsRatesURL = 'https://www.nbrb.by/api/bankingots/prices?startdate=$today&enddate=$today';
 
   final response = await http.get(Uri.parse(currentMetalsRatesURL));

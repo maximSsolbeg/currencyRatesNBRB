@@ -1,4 +1,8 @@
 import 'package:currency_rates/models/dynamics_mdl.dart';
+import 'package:currency_rates/providers/gold_dynamics_provider.dart';
+import 'package:currency_rates/providers/palladium_dynamics_provider.dart';
+import 'package:currency_rates/providers/platinum_dynamics_provider.dart';
+import 'package:currency_rates/providers/silver_dynamics_provider.dart';
 import 'package:currency_rates/providers/usd_dynamics_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +24,14 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
     MetalsRatesProvider _metalsRatesState =
         Provider.of<MetalsRatesProvider>(context);
     //TODO: delete temp usd data
-    UsdDynamicsProvider _usdDynamicsState =
-        Provider.of<UsdDynamicsProvider>(context);
+    GoldDynamicsProvider _goldDynamicsState =
+        Provider.of<GoldDynamicsProvider>(context);
+    SilverDynamicsProvider _silverDynamicsState =
+        Provider.of<SilverDynamicsProvider>(context);
+    PlatinumDynamicsProvider _platinumDynamicsState =
+    Provider.of<PlatinumDynamicsProvider>(context);
+    PalladiumDynamicsProvider _palladiumDynamicsState =
+    Provider.of<PalladiumDynamicsProvider>(context);
 
     return Stack(children: [
       ListView(children: [
@@ -34,26 +44,51 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
           trailingValue: '${_metalsRatesState.getGoldData.Value}',
           trailingSubText: 'BYN / 1g',
           symbolsInsteadOfIcon: true,
-          // currancyGraph: CustomGraph(
-          //   graphData:
-          //       _usdDynamicsState.getUsdDynamicsList as List<Dynamics>,
-          //   graphWidth: 95,
-          //   titleText: '',
-          //   graphName: 'USD dynamics',
-          //   lineColor: CustomColors.deepOrange,
-          //   primaryXAxisIsVisible: false,
-          //   primaryYAxisIsVisible: false,
-          // ),
+          currancyGraph: _goldDynamicsState.isRequestIsUnsuccessful
+              ? const Text('Graph of dynamics is unavailable',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: CustomColors.primaryGray,
+                  ))
+              : CustomGraph(
+                  graphData:
+                      _goldDynamicsState.getGoldDynamicsList as List<Dynamics>,
+                  graphWidth: 95,
+                  titleText: '',
+                  graphName: 'Gold dynamics',
+                  lineColor: CustomColors.paleGold,
+                  primaryXAxisIsVisible: false,
+                  primaryYAxisIsVisible: false,
+                ),
         ),
         GeneralListTile(
           titleText: 'Silver',
           subtitleText: '+0.01%**',
           leadingIcon: 'Ag',
+          //TODO: optimize colors for Silver icon
           // leadingIconBgColor: CustomColors.saturatedGold,
           // leadingIconColor: CustomColors.paleGold,
           trailingValue: '${_metalsRatesState.getSilverData.Value}',
           trailingSubText: 'BYN / 1g',
           symbolsInsteadOfIcon: true,
+          currancyGraph: _silverDynamicsState.isRequestIsUnsuccessful
+              ? const Text('Graph of dynamics is unavailable',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: CustomColors.primaryGray,
+                  ))
+              : CustomGraph(
+                  graphData: _silverDynamicsState.getSilverDynamicsList
+                      as List<Dynamics>,
+                  graphWidth: 95,
+                  titleText: '',
+                  graphName: 'Silver dynamics',
+                  lineColor: CustomColors.primaryGray,
+                  primaryXAxisIsVisible: false,
+                  primaryYAxisIsVisible: false,
+                ),
         ),
         GeneralListTile(
           titleText: 'Platinum',
@@ -64,6 +99,23 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
           trailingValue: '${_metalsRatesState.getPlatinumData.Value}',
           trailingSubText: 'BYN / 1g',
           symbolsInsteadOfIcon: true,
+          currancyGraph: _silverDynamicsState.isRequestIsUnsuccessful
+              ? const Text('Graph of dynamics is unavailable',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 13,
+                color: CustomColors.primaryGray,
+              ))
+              : CustomGraph(
+            graphData: _platinumDynamicsState.getPlatinumDynamicsList
+            as List<Dynamics>,
+            graphWidth: 95,
+            titleText: '',
+            graphName: 'Platinum dynamics',
+            lineColor: CustomColors.deepPurple,
+            primaryXAxisIsVisible: false,
+            primaryYAxisIsVisible: false,
+          ),
         ),
         GeneralListTile(
           titleText: 'Palladium',
@@ -74,35 +126,51 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
           trailingValue: '${_metalsRatesState.getPalladiumData.Value}',
           trailingSubText: 'BYN / 1g',
           symbolsInsteadOfIcon: true,
+          currancyGraph: _palladiumDynamicsState.isRequestIsUnsuccessful
+              ? const Text('Graph of dynamics is unavailable',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 13,
+                color: CustomColors.primaryGray,
+              ))
+              : CustomGraph(
+            graphData: _palladiumDynamicsState.getPalladiumDynamicsList
+            as List<Dynamics>,
+            graphWidth: 95,
+            titleText: '',
+            graphName: 'Palladium dynamics',
+            lineColor: CustomColors.deepBlue,
+            primaryXAxisIsVisible: false,
+            primaryYAxisIsVisible: false,
+          ),
         ),
       ]),
       Positioned.fill(
           child: _metalsRatesState.isRequestIsUnsuccessful
-            ? Container(
-              alignment: Alignment.center,
-              child: Row(
-                children: [
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        _metalsRatesState.errorDescrForCustomer,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          // color: CustomColors.primaryGray,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold
-                        ),),
-                    ),
+              ? Container(
+                  alignment: Alignment.center,
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Text(
+                            _metalsRatesState.errorDescrForCustomer,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                // color: CustomColors.primaryGray,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              decoration: BoxDecoration (
-                color: Colors.white.withOpacity(0.85),
-              ),
-            )
-            : const SizedBox.shrink()
-        ),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.85),
+                  ),
+                )
+              : const SizedBox.shrink()),
     ]);
   }
 }

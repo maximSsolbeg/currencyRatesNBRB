@@ -1,5 +1,8 @@
 import 'package:intl/intl.dart';
 
+String today = FormatDateForUrl(DateTime.now().toString());
+String thisDayAYearBefore = FormatDateForUrl(DateTime.now().subtract(const Duration(days: 365)).toString());
+
 String FormatDate (date) {
   DateTime parseDt = DateTime.parse(date);
   var newFormat = DateFormat('dd LLLL yyyy');
