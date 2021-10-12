@@ -1,13 +1,16 @@
 class RefinancingRate {
+  final int? Cur_ID;
   final String Date;
-  final double Value;
+  final double? Value;
 
-  RefinancingRate({required this.Date, required this.Value});
+  RefinancingRate(
+      {this.Cur_ID, required this.Date, this.Value});
 
-  factory RefinancingRate.fromJson(Map<String, dynamic> json){
+  factory RefinancingRate.fromJson(Map<String, dynamic> json) {
     return RefinancingRate(
-        Date: json['Date'] ?? '',
-        Value: json['Value'] ?? 0.00,
+      Cur_ID: json['Cur_ID'],
+      Date: json['Date'],
+      Value: json['Value'],
     );
   }
 }

@@ -4,9 +4,11 @@ import 'dart:convert';
 import 'package:currency_rates/common/format_date.dart';
 
 Future<List<Metal>> getCurrentMetalsRates() async {
-  var today = FormatDate(DateTime.now().toString());
+  var today = FormatDateForUrl(DateTime.now().toString());
+  // var today = '2021-10-04';
 
   String currentMetalsRatesURL = 'https://www.nbrb.by/api/bankingots/prices?startdate=$today&enddate=$today';
+
   final response = await http.get(Uri.parse(currentMetalsRatesURL));
 
   if(response.statusCode == 200) {
@@ -16,6 +18,6 @@ Future<List<Metal>> getCurrentMetalsRates() async {
 
     return currentMetalsRates;
   } else {
-    throw Exception('Error: ${response.reasonPhrase}');
+    throw Exception('Request metals rates error: ${response.reasonPhrase}');
   }
 }

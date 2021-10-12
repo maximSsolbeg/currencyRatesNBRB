@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:currency_rates/colors.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class GeneralListTile extends StatefulWidget {
   final String titleText;
@@ -9,8 +10,9 @@ class GeneralListTile extends StatefulWidget {
   final Color leadingIconColor;
   final String trailingValue;
   final String trailingSubText;
-  final bool? symbolsInsteadOfNumbers;
-  final Function(void)? onTapFunction;
+  final bool? symbolsInsteadOfIcon;
+  final Function? onTapFunction;
+  final Widget? currancyGraph;
 
   const GeneralListTile({
     Key? key,
@@ -21,8 +23,9 @@ class GeneralListTile extends StatefulWidget {
     this.leadingIconColor = CustomColors.secondaryGray,
     this.trailingValue = '',
     this.trailingSubText = '',
-    this.symbolsInsteadOfNumbers = false,
+    this.symbolsInsteadOfIcon = false,
     this.onTapFunction,
+    this.currancyGraph,
   }) : super(key: key);
 
   @override
@@ -38,32 +41,44 @@ class _GeneralListTileState extends State<GeneralListTile> {
         title: Text(widget.titleText),
         subtitle: Text(widget.subtitleText),
         leading: Container(
-          height: 60,
-          width: 60,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: widget.leadingIconBgColor,
-          ),
-          child: Center(
-            child: Text(widget.leadingIcon,
-                style: TextStyle(
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: widget.leadingIconBgColor,
+            ),
+            child: (() {
+              if (widget.symbolsInsteadOfIcon == true) {
+                return Center(
+                    child: Text(widget.leadingIcon,
+                        style: TextStyle(
+                          color: widget.leadingIconColor,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        )));
+              } else {
+                return Center(
+                    child: SvgPicture.asset(
+                  widget.leadingIcon,
+                  height: 24,
                   color: widget.leadingIconColor,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                )),
-          )
-        ),
+                ));
+              }
+            })()),
         trailing: SizedBox(
           height: double.infinity,
-          width: 170,
+          width: 180,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.asset(
-                'assets/graph.png',
+              Flexible(
+                child: widget.currancyGraph ?? const SizedBox.shrink(),
               ),
+              // Image.asset(
+              //   'assets/graph.png',
+              // ),
               const SizedBox(
-                width: 10,
+                width: 5,
               ),
               Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -86,14 +101,11 @@ class _GeneralListTileState extends State<GeneralListTile> {
             ],
           ),
         ),
-        // onTap: () {
-        //   Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) => UsdPage(),
-        //     ),
-        //   );
-        // },
+        onTap: () {
+          if (widget.onTapFunction != null) {
+            widget.onTapFunction!();
+          }
+        },
       ),
       const Divider(
         height: 10,
@@ -102,32 +114,3 @@ class _GeneralListTileState extends State<GeneralListTile> {
     ]);
   }
 }
-
-// class SymbolsOrIcon extends StatelessWidget {
-//   final Widget widget;
-//   final bool symbolsInsteadOfNumbers;
-//
-//   const SymbolsOrIcon({Key? key, this.widget, this.symbolsInsteadOfNumbers })
-//       : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     if (symbolsInsteadOfNumbers == true) {
-//       return Center(
-//           child: Text(widget.leadingIcon,
-//               style: TextStyle(
-//                 color: widget.leadingIconColor,
-//                 fontSize: 20,
-//                 fontWeight: FontWeight.bold,
-//               )));
-//     } else {
-//       return Center(
-//           child: Text(widget.leadingIcon,
-//               style: TextStyle(
-//                 color: widget.leadingIconColor,
-//                 fontSize: 20,
-//                 fontWeight: FontWeight.bold,
-//               )));
-//     }
-//   }
-// }

@@ -15,14 +15,6 @@ class Currency {
     required this.Cur_OfficialRate
   });
 
-  // Currency.fromJson(Map<String, dynamic> json)
-  //     : Cur_ID = json['Cur_ID'] as int,
-  //       Date = json['Date'] as String,
-  //       Cur_Abbreviation = json['Cur_Abbreviation'] as String,
-  //       Cur_Scale = json['Cur_Scale'] as int,
-  //       Cur_Name = json['Cur_Name'] as String,
-  //       Cur_OfficialRate = json['Cur_OfficialRate'] as double;
-
   factory Currency.fromJson(Map<String, dynamic> json) {
     return Currency(
       Cur_ID: json['Cur_ID'] ?? 0,
