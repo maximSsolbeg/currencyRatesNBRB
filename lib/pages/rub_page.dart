@@ -72,7 +72,7 @@ class _RubPageBodyState extends State<RubPageBody> {
               trailingSubText:
                   'BYN / 1 ${_currenciesRatesState.getRubData.Cur_Abbreviation}',
               onTapFunction: () {},
-              currancyGraph: const SizedBox.shrink(),
+              currencyGraph: const SizedBox.shrink(),
             ),
             Stack(
               children: [
@@ -113,8 +113,8 @@ class _RubPageBodyState extends State<RubPageBody> {
               ],
             ),
             const CalculateCurrency(
-              firstCurrency: 'RUB',
-              secondCurrency: 'BYN',
+              firstCurrency: 'rub',
+              secondCurrency: 'byn',
               bgrColor: CustomColors.lightGreen,
               textColor: CustomColors.deepGreen,
             ),

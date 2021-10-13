@@ -45,7 +45,7 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
           trailingValue: '${_metalsRatesState.getGoldData.Value}',
           trailingSubText: 'BYN / 1g',
           symbolsInsteadOfIcon: true,
-          currancyGraph: _goldDynamicsState.isRequestIsUnsuccessful
+          currencyGraph: _goldDynamicsState.isRequestIsUnsuccessful
               ? const Text('Graph of dynamics is unavailable',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -74,7 +74,7 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
           trailingValue: '${_metalsRatesState.getSilverData.Value}',
           trailingSubText: 'BYN / 1g',
           symbolsInsteadOfIcon: true,
-          currancyGraph: _silverDynamicsState.isRequestIsUnsuccessful
+          currencyGraph: _silverDynamicsState.isRequestIsUnsuccessful
               ? const Text('Graph of dynamics is unavailable',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -102,7 +102,7 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
           trailingValue: '${_metalsRatesState.getPlatinumData.Value}',
           trailingSubText: 'BYN / 1g',
           symbolsInsteadOfIcon: true,
-          currancyGraph: _silverDynamicsState.isRequestIsUnsuccessful
+          currencyGraph: _silverDynamicsState.isRequestIsUnsuccessful
               ? const Text('Graph of dynamics is unavailable',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -130,7 +130,7 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
           trailingValue: '${_metalsRatesState.getPalladiumData.Value}',
           trailingSubText: 'BYN / 1g',
           symbolsInsteadOfIcon: true,
-          currancyGraph: _palladiumDynamicsState.isRequestIsUnsuccessful
+          currencyGraph: _palladiumDynamicsState.isRequestIsUnsuccessful
               ? const Text('Graph of dynamics is unavailable',
                   textAlign: TextAlign.center,
                   style: TextStyle(

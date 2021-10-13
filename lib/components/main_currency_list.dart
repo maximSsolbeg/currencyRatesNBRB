@@ -105,7 +105,7 @@ class _MainCurrenciesListState extends State<MainCurrenciesList> {
                       trailingSubText:
                           'BYN / 1 ${_currenciesRatesState.getUsdData.Cur_Abbreviation}',
                       onTapFunction: goToUsdPage,
-                      currancyGraph: _usdDynamicsState.isRequestIsUnsuccessful
+                      currencyGraph: _usdDynamicsState.isRequestIsUnsuccessful
                           ? const Text('Graph of dynamics is unavailable',
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -135,7 +135,7 @@ class _MainCurrenciesListState extends State<MainCurrenciesList> {
                       trailingSubText:
                           'BYN / 1 ${_currenciesRatesState.getEurData.Cur_Abbreviation}',
                       onTapFunction: goToEurPage,
-                      currancyGraph: _eurDynamicsState.isRequestIsUnsuccessful
+                      currencyGraph: _eurDynamicsState.isRequestIsUnsuccessful
                           ? const Text('Graph of dynamics is unavailable',
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -165,7 +165,7 @@ class _MainCurrenciesListState extends State<MainCurrenciesList> {
                       trailingSubText:
                           'BYN/100 ${_currenciesRatesState.getRubData.Cur_Abbreviation}',
                       onTapFunction: goToRubPage,
-                      currancyGraph: _rubDynamicsState.isRequestIsUnsuccessful
+                      currencyGraph: _rubDynamicsState.isRequestIsUnsuccessful
                           ? const Text('Graph of dynamics is unavailable',
                               textAlign: TextAlign.center,
                               style: TextStyle(

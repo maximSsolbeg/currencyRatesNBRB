@@ -5,19 +5,18 @@ import 'package:currency_rates/colors.dart';
 import 'package:provider/provider.dart';
 
 class CalculateCurrency extends StatefulWidget {
-  final String firstCurrency;
+  final String firstCurrency; //usd, eur, rub
   final String secondCurrency;
   final Color? bgrColor;
   final Color? textColor;
 
-  const CalculateCurrency(
-      {Key? key,
-        required this.firstCurrency,
-        required this.secondCurrency,
-        this.bgrColor = CustomColors.primaryGray,
-        this.textColor = CustomColors.paleGray,
-      })
-      : super(key: key);
+  const CalculateCurrency({
+    Key? key,
+    required this.firstCurrency,
+    required this.secondCurrency,
+    this.bgrColor = CustomColors.primaryGray,
+    this.textColor = CustomColors.paleGray,
+  }) : super(key: key);
 
   State<CalculateCurrency> createState() => _CalculateCurrencyState();
 }
@@ -35,41 +34,63 @@ class _CalculateCurrencyState extends State<CalculateCurrency> {
   }
 
   void changeFirstCurValue(val) {
-    firstCurrencyValue = double.parse(val);
-    // final double formattedVal;
-    // var initialVal = double.parse(val);
-    // if(secondCurrencyValue != 0.0){
-    //   secondCurrencyValue = 0.0;
-    // }
-    // firstCurrencyValue = ;
+    if (secondCurrencyValue != 0.0) {
+      setState(() {
+        secondCurrencyValue = 0.0;
+      });
+    }
+    firstCurrencyValue = val > 0.0 ? val : val.abs();
   }
 
   void changeSecondCurValue(val) {
-    secondCurrencyValue = double.parse(val);
+    if (firstCurrencyValue != 0.0) {
+      setState(() {
+        firstCurrencyValue = 0.0;
+      });
+    }
+    secondCurrencyValue = val > 0.0 ? val : val.abs();
+  }
+
+  void calculateExchangeValue(CurRatesProvider allCurRatesState) {
+    late double currentCurrencyRate;
+
+    if (widget.firstCurrency == 'usd') {
+      currentCurrencyRate = allCurRatesState.getUsdData.Cur_OfficialRate;
+    } else if (widget.firstCurrency == 'eur') {
+      currentCurrencyRate = allCurRatesState.getEurData.Cur_OfficialRate;
+    } else if (widget.firstCurrency == 'rub') {
+      currentCurrencyRate = allCurRatesState.getRubData.Cur_OfficialRate / 100; //cur scale is 1:100
+    } else {
+      currentCurrencyRate = 1.0;
+    }
+
+    if (firstCurrencyValue != 0.0) {
+      setState(() {
+        secondCurrencyValue =
+            firstCurrencyValue * currentCurrencyRate;
+      });
+    } else if (secondCurrencyValue != 0.0) {
+      setState(() {
+        firstCurrencyValue =
+            secondCurrencyValue / currentCurrencyRate;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     CurRatesProvider _allCurRatesState = Provider.of<CurRatesProvider>(context);
 
-    double calculateExchangeValue() {
-      if(firstCurrencyValue != 0) {
-        return firstCurrencyValue * _allCurRatesState.getUsdData.Cur_OfficialRate;
-      } else if(secondCurrencyValue != 0) {
-        return secondCurrencyValue / _allCurRatesState.getUsdData.Cur_OfficialRate;
-      } else {
-        return 0.0;
-      }
-    }
-
     return Column(children: [
-      CurrencyTextfield(
-          curAbbreviation: widget.firstCurrency,
-          onChangeInputValue: (val) => changeFirstCurValue(val)
-    ),
-      CurrencyTextfield(
-          curAbbreviation: widget.secondCurrency,
-          onChangeInputValue: (val) => changeSecondCurValue(val)
+      CurrencyTextField(
+        curAbbreviation: widget.firstCurrency,
+        onChangeInputValue: (val) => changeFirstCurValue(val),
+        assignedValue: firstCurrencyValue,
+      ),
+      CurrencyTextField(
+        curAbbreviation: widget.secondCurrency,
+        onChangeInputValue: (val) => changeSecondCurValue(val),
+        assignedValue: secondCurrencyValue,
       ),
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -80,9 +101,8 @@ class _CalculateCurrencyState extends State<CalculateCurrency> {
             shadowColor: CustomColors.primaryGray,
             elevation: 5,
           ),
-          onPressed: () {},
-          child: Text('Calculate',
-              style: TextStyle(color: widget.textColor)),
+          onPressed: () => calculateExchangeValue(_allCurRatesState),
+          child: Text('Calculate', style: TextStyle(color: widget.textColor)),
         ),
       )
     ]);

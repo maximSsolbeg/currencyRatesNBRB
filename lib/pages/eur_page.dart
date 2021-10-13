@@ -72,7 +72,7 @@ class _EurPageBodyState extends State<EurPageBody> {
               trailingSubText:
                   'BYN / 1 ${_currenciesRatesState.getEurData.Cur_Abbreviation}',
               onTapFunction: () {},
-              currancyGraph: const SizedBox.shrink(),
+              currencyGraph: const SizedBox.shrink(),
             ),
             Stack(
               children: [
@@ -113,8 +113,8 @@ class _EurPageBodyState extends State<EurPageBody> {
               ],
             ),
             const CalculateCurrency(
-              firstCurrency: 'EUR',
-              secondCurrency: 'BYN',
+              firstCurrency: 'eur',
+              secondCurrency: 'byn',
               bgrColor: CustomColors.lightBlue,
               textColor: CustomColors.deepBlue,
             ),

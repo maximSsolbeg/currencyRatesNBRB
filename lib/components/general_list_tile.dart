@@ -11,8 +11,8 @@ class GeneralListTile extends StatefulWidget {
   final String trailingValue;
   final String trailingSubText;
   final bool? symbolsInsteadOfIcon;
-  final Function? onTapFunction;
-  final Widget? currancyGraph;
+  final Function()? onTapFunction;
+  final Widget? currencyGraph;
 
   const GeneralListTile({
     Key? key,
@@ -25,7 +25,7 @@ class GeneralListTile extends StatefulWidget {
     this.trailingSubText = '',
     this.symbolsInsteadOfIcon = false,
     this.onTapFunction,
-    this.currancyGraph,
+    this.currencyGraph,
   }) : super(key: key);
 
   @override
@@ -72,11 +72,8 @@ class _GeneralListTileState extends State<GeneralListTile> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                child: widget.currancyGraph ?? const SizedBox.shrink(),
+                child: widget.currencyGraph ?? const SizedBox.shrink(),
               ),
-              // Image.asset(
-              //   'assets/graph.png',
-              // ),
               const SizedBox(
                 width: 5,
               ),
