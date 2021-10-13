@@ -1,5 +1,8 @@
 import 'package:currency_rates/colors.dart' ;
 import 'package:currency_rates/components/settings_drawer.dart';
+import 'package:currency_rates/pages/eur_page.dart';
+import 'package:currency_rates/pages/rub_page.dart';
+import 'package:currency_rates/providers/currencies_info_provider.dart';
 import 'package:currency_rates/providers/eur_dynamics_provider.dart';
 import 'package:currency_rates/providers/gold_dynamics_provider.dart';
 import 'package:currency_rates/providers/metals_rates_provider.dart';
@@ -20,6 +23,7 @@ void main() => runApp(
   MultiProvider(
     providers: [
       ChangeNotifierProvider<CurRatesProvider>(create: (context) => CurRatesProvider()),
+      ChangeNotifierProvider<CurrenciesInfoProvider>(create: (context) => CurrenciesInfoProvider()),
       ChangeNotifierProvider<RefinancingRateProvider>(create: (context) => RefinancingRateProvider()),
       ChangeNotifierProvider<MetalsRatesProvider>(create: (context) => MetalsRatesProvider()),
       ChangeNotifierProvider<UsdDynamicsProvider>(create: (context) => UsdDynamicsProvider()),
@@ -30,7 +34,7 @@ void main() => runApp(
       ChangeNotifierProvider<PlatinumDynamicsProvider>(create: (context) => PlatinumDynamicsProvider()),
       ChangeNotifierProvider<PalladiumDynamicsProvider>(create: (context) => PalladiumDynamicsProvider()),
     ],
-    child: CurrenciesApp(),
+    child: const CurrenciesApp(),
   )
 );
 
@@ -98,7 +102,9 @@ class _CurrenciesAppState extends State<CurrenciesApp> {
       ),
       initialRoute: '/',
       routes: {
-        '/usd_page': (context) => UsdPage()
+        '/usd_page': (context) => UsdPage(),
+        '/eur_page': (context) => EurPage(),
+        '/rub_page': (context) => RubPage(),
       }
     );
   }

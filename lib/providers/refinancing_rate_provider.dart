@@ -22,8 +22,6 @@ class RefinancingRateProvider with ChangeNotifier {
     fullRefRateList = await getRefinancingRate();
     isLoadingRefRate = false;
 
-    print('fullRefRateList: $fullRefRateList');
-
     notifyListeners();
   }
 

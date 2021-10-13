@@ -1,9 +1,9 @@
+import 'package:currency_rates/common/growth.dart';
 import 'package:currency_rates/models/dynamics_mdl.dart';
 import 'package:currency_rates/providers/gold_dynamics_provider.dart';
 import 'package:currency_rates/providers/palladium_dynamics_provider.dart';
 import 'package:currency_rates/providers/platinum_dynamics_provider.dart';
 import 'package:currency_rates/providers/silver_dynamics_provider.dart';
-import 'package:currency_rates/providers/usd_dynamics_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:currency_rates/providers/metals_rates_provider.dart';
@@ -29,15 +29,16 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
     SilverDynamicsProvider _silverDynamicsState =
         Provider.of<SilverDynamicsProvider>(context);
     PlatinumDynamicsProvider _platinumDynamicsState =
-    Provider.of<PlatinumDynamicsProvider>(context);
+        Provider.of<PlatinumDynamicsProvider>(context);
     PalladiumDynamicsProvider _palladiumDynamicsState =
-    Provider.of<PalladiumDynamicsProvider>(context);
+        Provider.of<PalladiumDynamicsProvider>(context);
 
     return Stack(children: [
       ListView(children: [
         GeneralListTile(
           titleText: 'Gold',
-          subtitleText: '+0.05%**',
+          subtitleText: calcPercentageGrowth(
+              dynamicsList: _goldDynamicsState.getGoldDynamicsList),
           leadingIcon: 'Au',
           leadingIconBgColor: CustomColors.saturatedGold,
           leadingIconColor: CustomColors.paleGold,
@@ -64,7 +65,8 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
         ),
         GeneralListTile(
           titleText: 'Silver',
-          subtitleText: '+0.01%**',
+          subtitleText: calcPercentageGrowth(
+              dynamicsList: _silverDynamicsState.getSilverDynamicsList),
           leadingIcon: 'Ag',
           //TODO: optimize colors for Silver icon
           // leadingIconBgColor: CustomColors.saturatedGold,
@@ -92,7 +94,8 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
         ),
         GeneralListTile(
           titleText: 'Platinum',
-          subtitleText: '-0.02%**',
+          subtitleText: calcPercentageGrowth(
+              dynamicsList: _platinumDynamicsState.getPlatinumDynamicsList),
           leadingIcon: 'Pt',
           leadingIconBgColor: CustomColors.lightPurple,
           leadingIconColor: CustomColors.deepPurple,
@@ -101,25 +104,26 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
           symbolsInsteadOfIcon: true,
           currancyGraph: _silverDynamicsState.isRequestIsUnsuccessful
               ? const Text('Graph of dynamics is unavailable',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 13,
-                color: CustomColors.primaryGray,
-              ))
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: CustomColors.primaryGray,
+                  ))
               : CustomGraph(
-            graphData: _platinumDynamicsState.getPlatinumDynamicsList
-            as List<Dynamics>,
-            graphWidth: 95,
-            titleText: '',
-            graphName: 'Platinum dynamics',
-            lineColor: CustomColors.deepPurple,
-            primaryXAxisIsVisible: false,
-            primaryYAxisIsVisible: false,
-          ),
+                  graphData: _platinumDynamicsState.getPlatinumDynamicsList
+                      as List<Dynamics>,
+                  graphWidth: 95,
+                  titleText: '',
+                  graphName: 'Platinum dynamics',
+                  lineColor: CustomColors.deepPurple,
+                  primaryXAxisIsVisible: false,
+                  primaryYAxisIsVisible: false,
+                ),
         ),
         GeneralListTile(
           titleText: 'Palladium',
-          subtitleText: '+0.03%**',
+          subtitleText: calcPercentageGrowth(
+              dynamicsList: _palladiumDynamicsState.getPalladiumDynamicsList),
           leadingIcon: 'Pd',
           leadingIconBgColor: CustomColors.lightBlue,
           leadingIconColor: CustomColors.deepBlue,
@@ -128,21 +132,21 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
           symbolsInsteadOfIcon: true,
           currancyGraph: _palladiumDynamicsState.isRequestIsUnsuccessful
               ? const Text('Graph of dynamics is unavailable',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 13,
-                color: CustomColors.primaryGray,
-              ))
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: CustomColors.primaryGray,
+                  ))
               : CustomGraph(
-            graphData: _palladiumDynamicsState.getPalladiumDynamicsList
-            as List<Dynamics>,
-            graphWidth: 95,
-            titleText: '',
-            graphName: 'Palladium dynamics',
-            lineColor: CustomColors.deepBlue,
-            primaryXAxisIsVisible: false,
-            primaryYAxisIsVisible: false,
-          ),
+                  graphData: _palladiumDynamicsState.getPalladiumDynamicsList
+                      as List<Dynamics>,
+                  graphWidth: 95,
+                  titleText: '',
+                  graphName: 'Palladium dynamics',
+                  lineColor: CustomColors.deepBlue,
+                  primaryXAxisIsVisible: false,
+                  primaryYAxisIsVisible: false,
+                ),
         ),
       ]),
       Positioned.fill(
