@@ -22,16 +22,8 @@ class CalculateCurrency extends StatefulWidget {
 }
 
 class _CalculateCurrencyState extends State<CalculateCurrency> {
-  bool _isButtonDisabled = true;
   double firstCurrencyValue = 0.0;
   double secondCurrencyValue = 0.0;
-
-  @override
-  void changeButtonCondition() {
-    setState(() {
-      _isButtonDisabled = !_isButtonDisabled;
-    });
-  }
 
   void changeFirstCurValue(val) {
     if (secondCurrencyValue != 0.0) {
