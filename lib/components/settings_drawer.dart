@@ -28,14 +28,28 @@ class SettingsDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
+          DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.grey,
+              color: CustomColors.paleGray,
             ),
-            child: Text('Settings',
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(
+                'Settings',
                 style: TextStyle(
                   color: Colors.black,
-                )),
+                ),
+              ),
+              Text(
+                'NBRB Rates',
+                style: TextStyle(
+                  fontSize: 30,
+                  height: 2,
+                  fontStyle: FontStyle.italic,
+                  color: CustomColors.primaryGray,
+                ),
+              ),
+            ]),
           ),
           ListTile(
             title: const Text('About the App'),
