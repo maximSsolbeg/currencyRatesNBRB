@@ -3,7 +3,7 @@ import 'package:currency_rates/components/calculate_currency.dart';
 import 'package:currency_rates/components/general_list_tile.dart';
 import 'package:currency_rates/models/dynamics_mdl.dart';
 import 'package:currency_rates/providers/cur_rates_provider.dart';
-import 'package:currency_rates/providers/usd_dynamics_provider.dart';
+import 'package:currency_rates/providers/rub_dynamics_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:currency_rates/components/settings_drawer.dart';
 import 'package:currency_rates/colors.dart';
@@ -11,12 +11,12 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:currency_rates/components/custom_graph.dart';
 
-class UsdPage extends StatelessWidget {
+class RubPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('USD details',
+        title: const Text('RUB details',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         backgroundColor: Colors.white,
         centerTitle: true,
@@ -29,18 +29,18 @@ class UsdPage extends StatelessWidget {
         ),
         iconTheme: const IconThemeData(color: CustomColors.secondaryGray),
       ),
-      body: UsdPageBody(),
+      body: RubPageBody(),
       endDrawer: const SettingsDrawer(),
     );
   }
 }
 
-class UsdPageBody extends StatefulWidget {
+class RubPageBody extends StatefulWidget {
   @override
-  State<UsdPageBody> createState() => _UsdPageBodyState();
+  State<RubPageBody> createState() => _RubPageBodyState();
 }
 
-class _UsdPageBodyState extends State<UsdPageBody> {
+class _RubPageBodyState extends State<RubPageBody> {
   String reformatDate(date) {
     DateTime parseDt = DateTime.parse(date);
     var newFormat = DateFormat('dd.MM.yy');
@@ -53,24 +53,24 @@ class _UsdPageBodyState extends State<UsdPageBody> {
   Widget build(BuildContext context) {
     CurRatesProvider _currenciesRatesState =
         Provider.of<CurRatesProvider>(context);
-    UsdDynamicsProvider _usdDynamicsState =
-        Provider.of<UsdDynamicsProvider>(context);
+    RubDynamicsProvider _rubDynamicsState =
+        Provider.of<RubDynamicsProvider>(context);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             GeneralListTile(
-              titleText: 'US Dollar',
+              titleText: 'RUB',
               subtitleText: calcPercentageGrowth(
-                  dynamicsList: _usdDynamicsState.getUsdDynamicsList),
-              leadingIcon: 'assets/dollar-currency-sign.svg',
-              leadingIconBgColor: CustomColors.lightPink,
-              leadingIconColor: CustomColors.deepOrange,
+                  dynamicsList: _rubDynamicsState.getRubDynamicsList),
+              leadingIcon: 'assets/ruble-currency-sign.svg',
+              leadingIconBgColor: CustomColors.lightGreen,
+              leadingIconColor: CustomColors.deepGreen,
               trailingValue:
-                  '${_currenciesRatesState.getUsdData.Cur_OfficialRate}',
+                  '${_currenciesRatesState.getRubData.Cur_OfficialRate}',
               trailingSubText:
-                  'BYN / 1 ${_currenciesRatesState.getUsdData.Cur_Abbreviation}',
+                  'BYN / 1 ${_currenciesRatesState.getRubData.Cur_Abbreviation}',
               onTapFunction: () {},
               currancyGraph: const SizedBox.shrink(),
             ),
@@ -78,15 +78,15 @@ class _UsdPageBodyState extends State<UsdPageBody> {
               children: [
                 CustomGraph(
                   graphData:
-                      _usdDynamicsState.getUsdDynamicsList as List<Dynamics>,
-                  titleText: 'Dynamics of BYN against USD',
-                  graphName: 'USD dynamics',
-                  lineColor: CustomColors.deepOrange,
+                      _rubDynamicsState.getRubDynamicsList as List<Dynamics>,
+                  titleText: 'Dynamics of BYN against RUB',
+                  graphName: 'RUB dynamics',
+                  lineColor: CustomColors.deepGreen,
                   primaryXAxisIsVisible: true,
                   primaryYAxisIsVisible: true,
                 ),
                 Positioned.fill(
-                    child: _usdDynamicsState.isRequestIsUnsuccessful
+                    child: _rubDynamicsState.isRequestIsUnsuccessful
                         ? Container(
                             alignment: Alignment.center,
                             child: Row(
@@ -95,7 +95,7 @@ class _UsdPageBodyState extends State<UsdPageBody> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(20.0),
                                     child: Text(
-                                      _usdDynamicsState.errorDescrForCustomer,
+                                      _rubDynamicsState.errorDescrForCustomer,
                                       textAlign: TextAlign.center,
                                       style: const TextStyle(
                                           fontSize: 16,
@@ -113,10 +113,10 @@ class _UsdPageBodyState extends State<UsdPageBody> {
               ],
             ),
             const CalculateCurrency(
-              firstCurrency: 'USD',
+              firstCurrency: 'RUB',
               secondCurrency: 'BYN',
-              bgrColor: CustomColors.lightPink,
-              textColor: CustomColors.deepOrange,
+              bgrColor: CustomColors.lightGreen,
+              textColor: CustomColors.deepGreen,
             ),
           ],
         ),

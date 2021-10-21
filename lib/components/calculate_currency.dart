@@ -7,9 +7,16 @@ import 'package:provider/provider.dart';
 class CalculateCurrency extends StatefulWidget {
   final String firstCurrency;
   final String secondCurrency;
+  final Color? bgrColor;
+  final Color? textColor;
 
   const CalculateCurrency(
-      {Key? key, required this.firstCurrency, required this.secondCurrency})
+      {Key? key,
+        required this.firstCurrency,
+        required this.secondCurrency,
+        this.bgrColor = CustomColors.primaryGray,
+        this.textColor = CustomColors.paleGray,
+      })
       : super(key: key);
 
   State<CalculateCurrency> createState() => _CalculateCurrencyState();
@@ -41,8 +48,6 @@ class _CalculateCurrencyState extends State<CalculateCurrency> {
     secondCurrencyValue = double.parse(val);
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     CurRatesProvider _allCurRatesState = Provider.of<CurRatesProvider>(context);
@@ -70,14 +75,14 @@ class _CalculateCurrencyState extends State<CalculateCurrency> {
         padding: const EdgeInsets.all(8.0),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: CustomColors.lightPink,
+            primary: widget.bgrColor,
             onPrimary: CustomColors.paleGray,
             shadowColor: CustomColors.primaryGray,
             elevation: 5,
           ),
           onPressed: () {},
-          child: const Text('Calculate',
-              style: TextStyle(color: CustomColors.deepOrange)),
+          child: Text('Calculate',
+              style: TextStyle(color: widget.textColor)),
         ),
       )
     ]);

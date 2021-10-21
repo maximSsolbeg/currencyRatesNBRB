@@ -21,7 +21,8 @@ class EurDynamicsProvider with ChangeNotifier {
   Future<List<Dynamics>> getEurDynamicsData() async {
     late List<Dynamics> eurDynamicsData;
 
-    await getCurDynamicsForAYear(curId: 292).then((dynamicsData) {
+    // Cur_Id of EUR is 451 (do not confuse with old 292 which works for dynamics before 2021-07-08)
+    await getCurDynamicsForAYear(curId: 451).then((dynamicsData) {
       if (dynamicsData.isNotEmpty) {
         eurDynamicsData = dynamicsData;
       } else {

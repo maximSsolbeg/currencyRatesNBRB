@@ -18,7 +18,6 @@ class _RefinancingRateListState extends State<RefinancingRateList> {
     RefinancingRateProvider _refinancingRateState =
         Provider.of<RefinancingRateProvider>(context);
 
-    // print('_refinancingRateState.getFullRefRateList ${_refinancingRateState.getFullRefRateList}');
     return Stack(
         children: _refinancingRateState.isRequestIsUnsuccessful
             ? [
@@ -39,9 +38,7 @@ class _RefinancingRateListState extends State<RefinancingRateList> {
                             _refinancingRateState.errorDescrForCustomer,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
-                                // color: CustomColors.primaryGray,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold),
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),

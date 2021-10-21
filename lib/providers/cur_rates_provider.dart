@@ -5,7 +5,9 @@ import 'package:currency_rates/networking/currency_rates_api.dart';
 class CurRatesProvider with ChangeNotifier {
   late List<Currency> allCurRatesList;
 
-  List get getAllCurRatesList => allCurRatesList;
+  late List<Currency> fullSortedCurRatesList = sortCurRatesList();
+
+  List get getFullSortedCurRatesList => fullSortedCurRatesList;
 
   late Currency usdData = allCurRatesList.singleWhere((item) {
     return item.Cur_Abbreviation == 'USD';
@@ -25,6 +27,20 @@ class CurRatesProvider with ChangeNotifier {
 
   Currency get getRubData => rubData;
 
+  late Currency uahData = allCurRatesList.singleWhere((item) {
+    return item.Cur_Abbreviation == 'UAH';
+  });
+
+  late Currency plnData = allCurRatesList.singleWhere((item) {
+    return item.Cur_Abbreviation == 'PLN';
+  });
+
+  late Currency cnyData = allCurRatesList.singleWhere((item) {
+    return item.Cur_Abbreviation == 'CNY';
+  });
+
+  List get getAllCurRatesList => allCurRatesList;
+
   bool isLoadingCurRates = false;
   bool isRequestIsUnsuccessful = false;
   String errorDescrForCustomer = 'Error of loading data form the server';
@@ -35,6 +51,24 @@ class CurRatesProvider with ChangeNotifier {
     isLoadingCurRates = false;
 
     notifyListeners();
+  }
+
+  List<Currency> sortCurRatesList () {
+    allCurRatesList.removeWhere((item) => item == usdData);
+    allCurRatesList.removeWhere((item) => item == eurData);
+    allCurRatesList.removeWhere((item) => item == rubData);
+    allCurRatesList.removeWhere((item) => item == plnData);
+    allCurRatesList.removeWhere((item) => item == uahData);
+    allCurRatesList.removeWhere((item) => item == cnyData);
+
+    allCurRatesList.insert(0, usdData);
+    allCurRatesList.insert(1, eurData);
+    allCurRatesList.insert(2, rubData);
+    allCurRatesList.insert(3, plnData);
+    allCurRatesList.insert(4, uahData);
+    allCurRatesList.insert(5, cnyData);
+
+    return allCurRatesList;
   }
 
   Future<List<Currency>> getAllCurrencyRatesData() async {

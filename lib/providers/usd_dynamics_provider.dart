@@ -21,14 +21,13 @@ class UsdDynamicsProvider with ChangeNotifier {
   Future<List<Dynamics>> getUsdDynamicsData() async {
     late List<Dynamics> usdDynamicsData;
 
-    await getCurDynamicsForAYear(curId: 145).then((dynamicsData) {
+    // Cur_Id of USD is 431 (do not confuse with old 145 which works for dynamics before 2021-07-08)
+    await getCurDynamicsForAYear(curId: 431).then((dynamicsData) {
       if (dynamicsData.isNotEmpty) {
         usdDynamicsData = dynamicsData;
-        // isRequestIsUnsuccessful = false;
       } else {
         errorDescrForCustomer =
         'The Bank doesn\'t provide refinancing rate for this date';
-        // usdDynamicsData = dynamicsData;
         isRequestIsUnsuccessful = true;
       }
     }, onError: (er) {

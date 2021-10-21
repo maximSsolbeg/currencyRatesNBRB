@@ -21,7 +21,8 @@ class RubDynamicsProvider with ChangeNotifier {
   Future<List<Dynamics>> getRubDynamicsData() async {
     late List<Dynamics> rubDynamicsData;
 
-    await getCurDynamicsForAYear(curId: 298).then((dynamicsData) {
+    // Cur_Id of RUB is 456 (do not confuse with old 298 which works for dynamics before 2021-07-08)
+    await getCurDynamicsForAYear(curId: 456).then((dynamicsData) {
       if (dynamicsData.isNotEmpty) {
         rubDynamicsData = dynamicsData;
       } else {
