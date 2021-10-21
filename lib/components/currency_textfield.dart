@@ -2,27 +2,35 @@ import 'package:currency_rates/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class CurrencyTextfield extends StatefulWidget {
+class CurrencyTextField extends StatefulWidget {
   final String curAbbreviation;
-  // final VoidCallback clearValue;
-  final Function(String) onChangeInputValue;
+  final Function(double) onChangeInputValue;
+  final double? assignedValue;
 
-  const CurrencyTextfield({
+  const CurrencyTextField({
     Key? key,
     required this.curAbbreviation,
     required this.onChangeInputValue,
-    // required this.clearValue,
+    this.assignedValue,
   }) : super(key: key);
 
   @override
-  State<CurrencyTextfield> createState() => _CurrencyTextfieldState();
+  State<CurrencyTextField> createState() => _CurrencyTextFieldState();
 }
 
-class _CurrencyTextfieldState extends State<CurrencyTextfield> {
+class _CurrencyTextFieldState extends State<CurrencyTextField> {
   final _inputController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    _inputController.text = widget.assignedValue == 0.0
+        ? ''
+        : widget.assignedValue!
+            .toStringAsFixed(2)
+            .replaceFirst(RegExp(r'\.?0*$'), '');
+    _inputController.selection = TextSelection.fromPosition(
+        TextPosition(offset: _inputController.text.length));
+
     return Column(children: [
       TextField(
         controller: _inputController,
@@ -42,7 +50,7 @@ class _CurrencyTextfieldState extends State<CurrencyTextfield> {
               fontSize: 20.0,
               color: CustomColors.paleGray,
               fontWeight: FontWeight.normal),
-          labelText: 'Amount of ${widget.curAbbreviation}',
+          labelText: 'Amount of ${widget.curAbbreviation.toUpperCase()}',
           labelStyle: const TextStyle(
               fontSize: 20.0,
               color: CustomColors.primaryGray,
@@ -54,7 +62,8 @@ class _CurrencyTextfieldState extends State<CurrencyTextfield> {
             borderSide: BorderSide(color: CustomColors.primaryGray),
           ),
         ),
-        onChanged: (value) => widget.onChangeInputValue(value),
+        onChanged: (value) => widget
+            .onChangeInputValue(double.parse(value == '' ? '0.0' : value)),
       ),
     ]);
   }

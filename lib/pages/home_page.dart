@@ -1,4 +1,4 @@
-import 'package:currency_rates/colors.dart';
+import 'package:currency_rates/components/title_section.dart';
 import 'package:currency_rates/pages/all_currencies_page.dart';
 import 'package:currency_rates/components/main_currency_list.dart';
 import 'package:currency_rates/providers/cur_rates_provider.dart';
@@ -19,11 +19,13 @@ import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     CurRatesProvider _allCurrencyRatesState =
         Provider.of<CurRatesProvider>(context);
-    RefinancingRateProvider _refinancialRateState =
+    RefinancingRateProvider _refinansingRateState =
         Provider.of<RefinancingRateProvider>(context);
     MetalsRatesProvider _metalsRatesState =
         Provider.of<MetalsRatesProvider>(context);
@@ -48,14 +50,20 @@ class HomePage extends StatelessWidget {
             _eurDynamicsState.isLoadingEurDynamics ||
             _rubDynamicsState.isLoadingRubDynamics;
 
-    bool isSomeMetalDataIsLoading =
-        _metalsRatesState.isLoadingMetalsRates ||
-            _goldDynamicsState.isLoadingGoldDynamics ||
-            _silverDynamicsState.isLoadingSilverDynamics ||
-            _platinumDynamicsState.isLoadingPlatinumDynamics ||
-            _palladiumDynamicsState.isLoadingPalladiumDynamics;
+    bool isSomeMetalDataIsLoading = _metalsRatesState.isLoadingMetalsRates ||
+        _goldDynamicsState.isLoadingGoldDynamics ||
+        _silverDynamicsState.isLoadingSilverDynamics ||
+        _platinumDynamicsState.isLoadingPlatinumDynamics ||
+        _palladiumDynamicsState.isLoadingPalladiumDynamics;
 
-
+    void goToSeeAllPage() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AllCurrenciesPage(),
+        ),
+      );
+    }
 
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
@@ -64,40 +72,11 @@ class HomePage extends StatelessWidget {
         child: Column(
           //Currency Rates
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('Currencies',
-                    style: TextStyle(
-                      color: CustomColors.primaryGray,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    )),
-                SizedBox(
-                  height: 20,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size.fromHeight(15.0),
-                      padding: EdgeInsets.zero,
-                      minimumSize: const Size(60, 20),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AllCurrenciesPage(),
-                        ),
-                      );
-                    },
-                    child: const Text('See All',
-                        style: TextStyle(
-                          color: CustomColors.deepOrange,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        )),
-                  ),
-                ),
-              ],
+            TitleSection(
+                title: 'Currencies',
+                withButton: true,
+                buttonText: 'See All',
+                goToPageCallback: goToSeeAllPage,
             ),
             Container(
               height: 245,
@@ -108,43 +87,21 @@ class HomePage extends StatelessWidget {
             ),
 
             //Refinancing Rate
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 15.0, bottom: 10.0),
-                  child: const Text('Refinancing Rate',
-                      style: TextStyle(
-                        color: CustomColors.primaryGray,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      )),
-                ),
-              ],
+            const TitleSection(
+              title: 'Refinancing Rate',
             ),
-            Container(
+            SizedBox(
               height: 85,
-              child: _refinancialRateState.isLoadingRefRate
+              child: _refinansingRateState.isLoadingRefRate
                   ? const Center(child: CircularProgressIndicator())
                   : RefinancingRateList(),
             ),
 
             //Precious Metals Prices
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 15.0, bottom: 10.0),
-                  child: const Text('Precious Metals Prices',
-                      style: TextStyle(
-                        color: CustomColors.primaryGray,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      )),
-                ),
-              ],
+            const TitleSection(
+              title: 'Precious Metals Prices',
             ),
-            Container(
+            SizedBox(
               height: 330,
               child: isSomeMetalDataIsLoading
                   ? const Center(child: CircularProgressIndicator())

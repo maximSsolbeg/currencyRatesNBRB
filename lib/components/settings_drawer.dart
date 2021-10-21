@@ -1,3 +1,5 @@
+import 'package:currency_rates/colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SettingsDrawer extends StatelessWidget {
@@ -13,12 +15,10 @@ class SettingsDrawer extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.grey,
             ),
-            child: Text(
-                'Settings',
+            child: Text('Settings',
                 style: TextStyle(
                   color: Colors.black,
-                )
-            ),
+                )),
           ),
           ListTile(
             title: const Text('About the App'),
@@ -29,7 +29,17 @@ class SettingsDrawer extends StatelessWidget {
             onTap: () {},
           ),
           ListTile(
-            title: const Text('Contact Us'),
+            title: const Text('Contact us: web375@gmail.com',
+                style: TextStyle(
+                    color: CustomColors.primaryGray,
+                    fontWeight: FontWeight.normal)),
+            onTap: () {},
+          ),
+          ListTile(
+            title: const Text('Version: 1.0.0',
+                style: TextStyle(
+                    color: CustomColors.primaryGray,
+                    fontWeight: FontWeight.normal)),
             onTap: () {},
           ),
         ],

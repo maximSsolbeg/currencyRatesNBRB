@@ -62,8 +62,8 @@ class _RefinancingRateListState extends State<RefinancingRateList> {
                       leadingIconColor: CustomColors.deepPurple,
                       trailingValue:
                           '${_refinancingRateState.getCurrentRefRate.Value}%',
-                      trailingSubText: '-',
-                      currancyGraph:
+                      trailingSubText: '',
+                      currencyGraph:
                           _refinancingRateState.isRequestIsUnsuccessful
                               ? const Text('Graph of dynamics is unavailable',
                                   textAlign: TextAlign.center,
