@@ -22,6 +22,7 @@ class _RefinancingRateListState extends State<RefinancingRateList> {
         children: _refinancingRateState.isRequestIsUnsuccessful
             ? [
                 ListView(
+                  physics: NeverScrollableScrollPhysics(),
                   children: const [
                     DummyRefinancingRate(),
                   ],
@@ -51,6 +52,7 @@ class _RefinancingRateListState extends State<RefinancingRateList> {
               ]
             : [
                 ListView(
+                  physics: NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   children: <Widget>[
                     GeneralListTile(
