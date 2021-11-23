@@ -26,7 +26,7 @@ class _TitleSectionState extends State<TitleSection> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 15.0, bottom: 10.0),
+          padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
           child: Text(widget.title,
               style: const TextStyle(
                 color: CustomColors.primaryGray,
@@ -35,11 +35,11 @@ class _TitleSectionState extends State<TitleSection> {
               )),
         ),
         SizedBox(
-          height: 20,
+          // height: 20,
           child: widget.withButton!
               ? TextButton(
                   style: TextButton.styleFrom(
-                    fixedSize: const Size.fromHeight(15.0),
+                    fixedSize: const Size.fromHeight(5.0),
                     padding: EdgeInsets.zero,
                     minimumSize: const Size(60, 20),
                   ),

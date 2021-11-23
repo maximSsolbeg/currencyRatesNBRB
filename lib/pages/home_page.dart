@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(right: 16.0, left: 16.0),
         child: Column(
           //Currency Rates
           children: <Widget>[
@@ -79,8 +79,7 @@ class HomePage extends StatelessWidget {
                 goToPageCallback: goToSeeAllPage,
             ),
             Container(
-              height: 245,
-              margin: const EdgeInsets.only(top: 14.0),
+              height: 280,
               child: isSomeCurrencyDataIsLoading
                   ? const Center(child: CircularProgressIndicator())
                   : MainCurrenciesList(),
@@ -91,7 +90,7 @@ class HomePage extends StatelessWidget {
               title: 'Refinancing Rate',
             ),
             SizedBox(
-              height: 85,
+              height: 80,
               child: _refinansingRateState.isLoadingRefRate
                   ? const Center(child: CircularProgressIndicator())
                   : RefinancingRateList(),
@@ -102,7 +101,7 @@ class HomePage extends StatelessWidget {
               title: 'Precious Metals Prices',
             ),
             SizedBox(
-              height: 330,
+              height: 370,
               child: isSomeMetalDataIsLoading
                   ? const Center(child: CircularProgressIndicator())
                   : MetalsRatesList(),

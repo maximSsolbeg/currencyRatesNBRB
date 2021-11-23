@@ -60,6 +60,7 @@ class _MainCurrenciesListState extends State<MainCurrenciesList> {
         children: _currenciesRatesState.isRequestIsUnsuccessful
             ? [
                 ListView(
+                  physics: NeverScrollableScrollPhysics(),
                   children: const [
                     DummyCurrency(),
                     DummyCurrency(),
@@ -92,6 +93,7 @@ class _MainCurrenciesListState extends State<MainCurrenciesList> {
             : [
                 ListView(
                   scrollDirection: Axis.vertical,
+                  physics: NeverScrollableScrollPhysics(),
                   children: <Widget>[
                     GeneralListTile(
                       titleText: 'US Dollar',

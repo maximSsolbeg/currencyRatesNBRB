@@ -34,7 +34,9 @@ class _MetalsRatesListState extends State<MetalsRatesList> {
         Provider.of<PalladiumDynamicsProvider>(context);
 
     return Stack(children: [
-      ListView(children: [
+      ListView(
+          physics: NeverScrollableScrollPhysics(),
+          children: [
         GeneralListTile(
           titleText: 'Gold',
           subtitleText: calcPercentageGrowth(

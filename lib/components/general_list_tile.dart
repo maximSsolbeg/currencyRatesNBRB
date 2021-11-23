@@ -105,7 +105,7 @@ class _GeneralListTileState extends State<GeneralListTile> {
         },
       ),
       const Divider(
-        height: 10,
+        height: 20,
         color: CustomColors.primaryGray,
       ),
     ]);
